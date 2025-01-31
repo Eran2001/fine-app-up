@@ -1,0 +1,20 @@
+create table
+
+CREATE TABLE all_fines (
+    fine_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    fine DECIMAL(10,2) NOT NULL
+);
+
+
+insert default data
+
+INSERT INTO all_fines (name, type, fine) 
+VALUES 
+('Speeding', 'Traffic Violation', 5000.00),
+('Wrong Parking', 'Parking Violation', 2000.00),
+('Running Red Light', 'Traffic Violation', 7000.00),
+('No Helmet', 'Safety Violation', 1500.00),
+('Driving Without License', 'Legal Violation', 10000.00);
+

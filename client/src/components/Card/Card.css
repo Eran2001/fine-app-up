@@ -1,0 +1,22 @@
+/* Define the animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideIn 1s forwards;
+}
+
+.card-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

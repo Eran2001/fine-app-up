@@ -1,0 +1,32 @@
+.user-dashboard {
+    min-height: 100vh;
+    background-color: #f8fafc;
+}
+
+.sidebar-link {
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-link:hover {
+    border-left: 4px solid #4f46e5;
+    background-color: #eef2ff;
+}
+
+.avatar-container {
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.avatar-container:hover {
+    transform: scale(1.05);
+}
+
+.content-transition {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
