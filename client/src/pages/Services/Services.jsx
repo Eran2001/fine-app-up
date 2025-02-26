@@ -1,7 +1,7 @@
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import { useEffect } from "react";
-import { motion } from "framer-motion"; // Add this import
+import { motion } from "framer-motion";
 
 const Services = () => {
   useEffect(() => {
@@ -16,7 +16,7 @@ const Services = () => {
         });
       },
       {
-        threshold: 0.2, // Trigger when 20% of the element is in view
+        threshold: 0.2,
       }
     );
 
@@ -30,7 +30,7 @@ const Services = () => {
         <div className="absolute w-96 h-96 -top-48 -right-48 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
         <div className="absolute w-96 h-96 -bottom-48 left-48 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
       </div>
-      
+
       <Navbar />
       <div className="min-h-screen relative z-10">
         <head>
@@ -147,10 +147,9 @@ const Services = () => {
             }
           `}</style>
         </head>
-        
+
         <div className="container mx-auto px-4 py-16 md:py-24">
-          {/* Fine.lk Section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -163,21 +162,22 @@ const Services = () => {
               Clear Fine, Save Time
             </h3>
             <p className="text-lg md:text-xl max-w-4xl mx-auto leading-relaxed text-gray-600 font-light">
-              Fine.lk simplifies the process of managing traffic fines for citizens, officers, and post offices. 
-              Pay, report, and resolve issues conveniently while staying informed with real-time updates.
+              Fine.lk simplifies the process of managing traffic fines for
+              citizens, officers, and post offices. Pay, report, and resolve
+              issues conveniently while staying informed with real-time updates.
             </p>
           </motion.div>
 
-          {/* Services Sections */}
           <div className="space-y-16 md:space-y-32">
-            {/* Citizens Section */}
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="grid md:grid-cols-2 gap-12 md:gap-16 items-center service-card p-8 md:p-12 rounded-3xl"
             >
               <div className="space-y-6 order-2 md:order-1">
-                <h3 className="text-3xl md:text-4xl font-bold gradient-text">For Citizens</h3>
+                <h3 className="text-3xl md:text-4xl font-bold gradient-text">
+                  For Citizens
+                </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">
                   For individuals, Fine.lk offers an intuitive system to manage
                   traffic fines. Users can easily pay fines online through
@@ -200,8 +200,7 @@ const Services = () => {
               </div>
             </motion.div>
 
-            {/* Police Offices Section */}
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="grid md:grid-cols-2 gap-12 md:gap-16 items-center service-card p-8 md:p-12 rounded-3xl"
@@ -214,7 +213,9 @@ const Services = () => {
                 />
               </div>
               <div className="space-y-6">
-                <h3 className="text-3xl md:text-4xl font-bold gradient-text">For Police Offices</h3>
+                <h3 className="text-3xl md:text-4xl font-bold gradient-text">
+                  For Police Offices
+                </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">
                   For law enforcement officers, Fine.lk provides tools to issue
                   fines digitally, track payment statuses, and monitor
@@ -225,14 +226,15 @@ const Services = () => {
               </div>
             </motion.div>
 
-            {/* Post Office Section */}
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="grid md:grid-cols-2 gap-12 md:gap-16 items-center service-card p-8 md:p-12 rounded-3xl"
             >
               <div className="space-y-6 order-2 md:order-1">
-                <h3 className="text-3xl md:text-4xl font-bold gradient-text">For Post Offices</h3>
+                <h3 className="text-3xl md:text-4xl font-bold gradient-text">
+                  For Post Offices
+                </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">
                   For post office officials, the platform streamlines offline
                   payment processing by enabling easy verification of fine

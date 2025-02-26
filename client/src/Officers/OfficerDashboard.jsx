@@ -1,6 +1,15 @@
 import { Link, Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaHome, FaClipboardList, FaFileInvoiceDollar, FaPlusCircle, FaExclamationCircle, FaCog, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaHome,
+  FaClipboardList,
+  FaFileInvoiceDollar,
+  FaPlusCircle,
+  FaExclamationCircle,
+  FaCog,
+  FaUserCircle,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
 const OfficerDashboard = () => {
   const menuItems = [
@@ -8,18 +17,20 @@ const OfficerDashboard = () => {
     { path: "officer-overview", icon: <FaClipboardList />, text: "Overview" },
     { path: "fines", icon: <FaFileInvoiceDollar />, text: "Fines" },
     { path: "issue-fine", icon: <FaPlusCircle />, text: "Issue a Fine" },
-    { path: "manage-issues", icon: <FaExclamationCircle />, text: "Report an Issue" },
+    {
+      path: "manage-issues",
+      icon: <FaExclamationCircle />,
+      text: "Report an Issue",
+    },
   ];
 
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-gray-50 to-purple-50">
-      {/* Sidebar */}
-      <motion.div 
+      <motion.div
         initial={{ x: -250 }}
         animate={{ x: 0 }}
         className="w-64 bg-white/80 backdrop-blur-md shadow-xl rounded-r-2xl flex flex-col justify-between"
       >
-        {/* ...existing code for div structure... */}
         <div>
           <div className="p-6 text-xl font-bold text-purple-800 border-b border-gray-100">
             <motion.span
@@ -62,10 +73,8 @@ const OfficerDashboard = () => {
         </div>
       </motion.div>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        {/* Navbar */}
-        <motion.nav 
+        <motion.nav
           initial={{ y: -50 }}
           animate={{ y: 0 }}
           className="bg-white/80 backdrop-blur-md shadow-md rounded-b-2xl mb-4"
@@ -79,13 +88,19 @@ const OfficerDashboard = () => {
             </Link>
             <div className="space-x-6 flex items-center">
               <motion.div whileHover={{ scale: 1.05 }}>
-                <Link to="#" className="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                <Link
+                  to="#"
+                  className="flex items-center text-gray-600 hover:text-purple-600 transition-colors"
+                >
                   <FaCog className="mr-2" />
                   Settings
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }}>
-                <Link to="#" className="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                <Link
+                  to="#"
+                  className="flex items-center text-gray-600 hover:text-purple-600 transition-colors"
+                >
                   <FaUserCircle className="mr-2" />
                   Profile
                 </Link>
@@ -94,7 +109,6 @@ const OfficerDashboard = () => {
           </div>
         </motion.nav>
 
-        {/* Content Area */}
         <main className="flex-1 p-6">
           <motion.div
             initial={{ opacity: 0 }}
@@ -110,4 +124,3 @@ const OfficerDashboard = () => {
 };
 
 export default OfficerDashboard;
-

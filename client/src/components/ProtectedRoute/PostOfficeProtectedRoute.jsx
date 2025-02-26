@@ -1,8 +1,8 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 
 const PostOfficeProtectedRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = !!localStorage.getItem('token'); // Check if token exists in localStorage
+  const isAuthenticated = !!localStorage.getItem("token");
 
   return (
     <Route

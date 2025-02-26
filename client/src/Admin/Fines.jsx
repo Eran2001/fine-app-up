@@ -9,8 +9,10 @@ const Fines = () => {
     fine: "",
   });
   const [editId, setEditId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // 🔹 Fetch fines
   useEffect(() => {
     fetchFines();
   }, []);
@@ -20,17 +22,26 @@ const Fines = () => {
       const response = await fetch(`${BASE_URL}/api/fines`);
       const data = await response.json();
       setFines(data);
+      setItems(data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching fines:", error);
+      setLoading(false);
     }
   };
 
-  // 🔹 Handle input changes
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 🔹 Add new fine (POST)
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const handleAddFine = async (e) => {
     e.preventDefault();
     try {
@@ -52,7 +63,6 @@ const Fines = () => {
     }
   };
 
-  // 🔹 Update fine (PUT)
   const handleUpdateFine = async (e) => {
     e.preventDefault();
     if (!editId) return;
@@ -77,7 +87,6 @@ const Fines = () => {
     }
   };
 
-  // 🔹 Delete fine (DELETE)
   const handleDeleteFine = async (id) => {
     if (!window.confirm("Are you sure you want to delete this fine?")) return;
 
@@ -97,7 +106,6 @@ const Fines = () => {
     }
   };
 
-  // 🔹 Populate form for editing
   const handleEditFine = (fine) => {
     setFormData({ name: fine.name, type: fine.type, fine: fine.fine });
     setEditId(fine.fine_id);
@@ -107,7 +115,14 @@ const Fines = () => {
     <div>
       <h1 className="text-2xl font-bold mb-4">Fines List</h1>
 
-      {/* 🟢 Fine Form */}
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        placeholder="Search..."
+        className="border px-2 py-1 mb-4"
+      />
+
       <form
         onSubmit={editId ? handleUpdateFine : handleAddFine}
         className="mb-4"
@@ -144,53 +159,56 @@ const Fines = () => {
         </button>
       </form>
 
-      {/* 🟡 Fines Table */}
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr>
-              <th className="px-2 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
-                Fine_ID
-              </th>
-              <th className="px-20 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
-                Name
-              </th>
-              <th className="px-4 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
-                Type
-              </th>
-              <th className="px-4 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
-                Fine (Rs.)
-              </th>
-              <th className="px-4 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {fines.map((fine) => (
-              <tr key={fine.fine_id}>
-                <td className="px-2 py-3 border-b">{fine.fine_id}</td>
-                <td className="px-20 py-3 border-b">{fine.name}</td>
-                <td className="px-4 py-3 border-b">{fine.type}</td>
-                <td className="px-4 py-3 border-b">{fine.fine}</td>
-                <td className="px-4 py-3 border-b">
-                  <button
-                    onClick={() => handleEditFine(fine)}
-                    className="px-2 py-1 text-white bg-yellow-500 mr-2"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDeleteFine(fine.fine_id)}
-                    className="px-2 py-1 text-white bg-red-500"
-                  >
-                    Delete
-                  </button>
-                </td>
+        {loading ? (
+          <div className="text-center p-4">Loading...</div>
+        ) : (
+          <table className="min-w-full bg-white border border-gray-200">
+            <thead>
+              <tr>
+                <th className="px-2 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
+                  Fine_ID
+                </th>
+                <th className="px-20 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
+                  Name
+                </th>
+                <th className="px-4 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
+                  Type
+                </th>
+                <th className="px-4 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
+                  Fine (Rs.)
+                </th>
+                <th className="px-4 py-3 border-b bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase">
+                  Actions
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredItems.map((fine) => (
+                <tr key={fine.fine_id}>
+                  <td className="px-2 py-3 border-b">{fine.fine_id}</td>
+                  <td className="px-20 py-3 border-b">{fine.name}</td>
+                  <td className="px-4 py-3 border-b">{fine.type}</td>
+                  <td className="px-4 py-3 border-b">{fine.fine}</td>
+                  <td className="px-4 py-3 border-b">
+                    <button
+                      onClick={() => handleEditFine(fine)}
+                      className="px-2 py-1 text-white bg-yellow-500 mr-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteFine(fine.fine_id)}
+                      className="px-2 py-1 text-white bg-red-500"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

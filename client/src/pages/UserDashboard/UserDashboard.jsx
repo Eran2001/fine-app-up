@@ -1,24 +1,29 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaHome, FaClipboardList, FaMoneyBill, FaExclamationCircle, FaCog, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaHome,
+  FaClipboardList,
+  FaMoneyBill,
+  FaExclamationCircle,
+  FaCog,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
 const UserDashboard = () => {
-  // Initialize avatar state from localStorage if available
   const savedAvatar = localStorage.getItem("avatar");
   const [avatar, setAvatar] = useState(savedAvatar || "/avatar.jpg");
 
-  // Handle file upload
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setAvatar(reader.result); // Update avatar with the uploaded image
-        localStorage.setItem("avatar", reader.result); // Save new avatar to localStorage
+        setAvatar(reader.result);
+        localStorage.setItem("avatar", reader.result);
+        reader.readAsDataURL(file);
       };
-      reader.readAsDataURL(file);
     }
   };
 
@@ -26,13 +31,16 @@ const UserDashboard = () => {
     { path: "/", icon: <FaHome />, text: "Home" },
     { path: "user-overview", icon: <FaClipboardList />, text: "Overview" },
     { path: "fine-pay", icon: <FaMoneyBill />, text: "Pay Fine" },
-    { path: "report-issue", icon: <FaExclamationCircle />, text: "Report an Issue" },
+    {
+      path: "report-issue",
+      icon: <FaExclamationCircle />,
+      text: "Report an Issue",
+    },
   ];
 
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-gray-50 to-blue-50">
-      {/* Sidebar */}
-      <motion.div 
+      <motion.div
         initial={{ x: -250 }}
         animate={{ x: 0 }}
         className="w-64 bg-white/80 backdrop-blur-md shadow-xl rounded-r-2xl flex flex-col justify-between"
@@ -79,10 +87,8 @@ const UserDashboard = () => {
         </div>
       </motion.div>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        {/* Navbar */}
-        <motion.nav 
+        <motion.nav
           initial={{ y: -50 }}
           animate={{ y: 0 }}
           className="bg-white/80 backdrop-blur-md shadow-md rounded-b-2xl mb-4"
@@ -96,12 +102,15 @@ const UserDashboard = () => {
             </Link>
             <div className="space-x-6 flex items-center">
               <motion.div whileHover={{ scale: 1.05 }}>
-                <Link to="#" className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                <Link
+                  to="#"
+                  className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+                >
                   <FaCog className="mr-2" />
                   Settings
                 </Link>
               </motion.div>
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.1 }}
                 className="relative group"
               >
@@ -123,7 +132,6 @@ const UserDashboard = () => {
           </div>
         </motion.nav>
 
-        {/* Content Area */}
         <main className="flex-1 p-6">
           <motion.div
             initial={{ opacity: 0 }}

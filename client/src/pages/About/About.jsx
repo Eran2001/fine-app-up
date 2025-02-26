@@ -13,7 +13,6 @@ const About = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-50 to-white">
       <Navbar />
       <div className="font-sans flex-grow">
-        {/* Hero Section */}
         <div
           className="relative bg-cover bg-center bg-fixed overflow-hidden"
           style={{
@@ -38,10 +37,9 @@ const About = () => {
           </div>
         </div>
 
-        {/* Content Section */}
         <div className="relative max-w-5xl mx-auto py-24 px-6 lg:px-8">
           <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
-          
+
           <h3
             className="text-4xl font-bold text-center mb-8 text-gray-800 tracking-tight"
             data-aos="fade-up"
@@ -61,11 +59,11 @@ const About = () => {
               data-aos="fade-up"
               data-aos-duration="1000"
             >
-              Welcome to Fine.lk, Sri Lanka&apos;s innovative platform dedicated to
-              revolutionizing the way fines are managed and paid. Our mission is to
-              provide a seamless, efficient, and transparent solution for
-              individuals, law enforcement authorities, and intermediaries, making
-              fine management simpler and more accessible.
+              Welcome to Fine.lk, Sri Lanka&apos;s innovative platform dedicated
+              to revolutionizing the way fines are managed and paid. Our mission
+              is to provide a seamless, efficient, and transparent solution for
+              individuals, law enforcement authorities, and intermediaries,
+              making fine management simpler and more accessible.
             </p>
 
             <p
@@ -74,11 +72,11 @@ const About = () => {
               data-aos-duration="1000"
               data-aos-delay="100"
             >
-              We believe in bridging the gap between technology and public services
-              by incorporating features that cater to both digital and non-digital
-              users. Our integration with offline payment channels like post offices
-              ensures inclusivity, enabling individuals across urban and rural areas
-              to benefit from the platform.
+              We believe in bridging the gap between technology and public
+              services by incorporating features that cater to both digital and
+              non-digital users. Our integration with offline payment channels
+              like post offices ensures inclusivity, enabling individuals across
+              urban and rural areas to benefit from the platform.
             </p>
 
             <p
@@ -89,13 +87,13 @@ const About = () => {
             >
               As a proud advocate of digitization, Fine.lk is not just about
               simplifying processes but also contributing to the broader goal of
-              modernizing public services in Sri Lanka. By fostering transparency
-              and accessibility, we aim to empower citizens and authorities alike,
-              ensuring a safer, more connected, and efficient system for all.
+              modernizing public services in Sri Lanka. By fostering
+              transparency and accessibility, we aim to empower citizens and
+              authorities alike, ensuring a safer, more connected, and efficient
+              system for all.
             </p>
           </div>
 
-          {/* Decorative Elements */}
           <div className="absolute -left-4 top-1/4 w-24 h-24 bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="absolute -right-4 bottom-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"></div>
         </div>
@@ -107,7 +105,6 @@ const About = () => {
 
 export default About;
 
-// Add this CSS to your global styles or as a style tag in your HTML
 // <style>
 //   .bg-grid-pattern {
 //     background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px),

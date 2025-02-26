@@ -14,17 +14,10 @@ const Home = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [slideIn, setSlideIn] = useState(false);
-  
-  const texts = ["Clear Fine", "Save Time", "Save Money", "Stay Safe"];
-  const images = [
-    "/37a.jpg",
-    "/dd.png",
-    "/20.jpg",
-    "/67.jpg",
 
-    "fine.jpg",
-  ];
-  
+  const texts = ["Clear Fine", "Save Time", "Save Money", "Stay Safe"];
+  const images = ["/37a.jpg", "/dd.png", "/20.jpg", "/67.jpg", "fine.jpg"];
+
   const slideVariants = {
     enter: (direction) => ({
       x: direction > 0 ? 1000 : -1000,
@@ -38,8 +31,8 @@ const Home = () => {
       transition: {
         x: { type: "spring", stiffness: 300, damping: 30 },
         opacity: { duration: 0.5 },
-        scale: { duration: 6 }
-      }
+        scale: { duration: 6 },
+      },
     },
     exit: (direction) => ({
       x: direction < 0 ? 1000 : -1000,
@@ -47,9 +40,9 @@ const Home = () => {
       scale: 1.1,
       transition: {
         x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.5 }
-      }
-    })
+        opacity: { duration: 0.5 },
+      },
+    }),
   };
 
   useEffect(() => {
@@ -59,14 +52,14 @@ const Home = () => {
 
   useEffect(() => {
     const textInterval = setInterval(() => {
-      setTextIndex(prev => (prev + 1) % texts.length);
+      setTextIndex((prev) => (prev + 1) % texts.length);
     }, 4000);
     return () => clearInterval(textInterval);
   });
 
   useEffect(() => {
     const imageInterval = setInterval(() => {
-      setImageIndex(prev => (prev + 1) % images.length);
+      setImageIndex((prev) => (prev + 1) % images.length);
     }, 5000);
     return () => clearInterval(imageInterval);
   }, []);
@@ -95,12 +88,11 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isVisible ? 1 : 0 }}
         className="relative"
       >
-        {/* Hero Section */}
         <div className="relative h-[93.5vh] overflow-hidden">
           <AnimatePresence mode="wait" initial={false} custom={imageIndex}>
             <motion.div
@@ -112,7 +104,7 @@ const Home = () => {
               exit="exit"
               className="absolute inset-0"
             >
-              <motion.img 
+              <motion.img
                 src={images[imageIndex]}
                 alt={`Hero ${imageIndex + 1}`}
                 className="w-full h-full object-cover"
@@ -127,19 +119,19 @@ const Home = () => {
                   times: [0, 1],
                 }}
               />
-              
-              {/* Enhanced overlays */}
-              <motion.div 
+
+              <motion.div
                 className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
               />
-              
-              <motion.div 
+
+              <motion.div
                 className="absolute inset-0"
                 style={{
-                  background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)'
+                  background:
+                    "radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)",
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -147,17 +139,16 @@ const Home = () => {
               />
             </motion.div>
           </AnimatePresence>
-          
-          {/* Enhanced image navigation dots */}
+
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
             {images.map((_, idx) => (
               <motion.button
                 key={idx}
                 onClick={() => handleImageNavigation(idx)}
                 className={`w-3 h-3 rounded-full transition-all duration-500 ${
-                  idx === imageIndex 
-                    ? 'bg-white scale-125' 
-                    : 'bg-white/50 hover:bg-white/75'
+                  idx === imageIndex
+                    ? "bg-white scale-125"
+                    : "bg-white/50 hover:bg-white/75"
                 }`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
@@ -166,14 +157,14 @@ const Home = () => {
             ))}
           </div>
 
-          {/* Subtle gradient shadow for additional depth */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
         </div>
-        
-        {/* Hero Content */}
-        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center ${
-          slideIn ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        } transition-all duration-1000 ease-out`}>
+
+        <div
+          className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center ${
+            slideIn ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          } transition-all duration-1000 ease-out`}
+        >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -181,12 +172,12 @@ const Home = () => {
             className="relative"
           >
             <motion.div
-              animate={{ 
+              animate={{
                 textShadow: [
                   "0 2px 4px rgba(0,0,0,0.3)",
                   "0 2px 8px rgba(0,0,0,0.2)",
-                  "0 2px 4px rgba(0,0,0,0.3)"
-                ]
+                  "0 2px 4px rgba(0,0,0,0.3)",
+                ],
               }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -213,7 +204,8 @@ const Home = () => {
               className="space-y-4"
             >
               <h2 className="text-3xl font-light text-white leading-relaxed drop-shadow-lg">
-                Fine.lk simplifies the process of managing traffic fines for citizens,
+                Fine.lk simplifies the process of managing traffic fines for
+                citizens,
               </h2>
               <h2 className="text-3xl font-light text-white leading-relaxed drop-shadow-lg">
                 officers, and post offices
@@ -223,7 +215,11 @@ const Home = () => {
             {/* Enhanced floating button */}
             <motion.div
               animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               className="mt-16"
             >
               <Link
@@ -237,8 +233,7 @@ const Home = () => {
           </motion.div>
         </div>
       </motion.div>
-      
-      {/* Content Sections with Enhanced Animations */}
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -8,7 +8,6 @@ const Card = () => {
     <section className="bg-gray-100 light:bg-gray-900 py-8">
       <div className="max-w-screen-xl mx-auto">
         <div className="grid gap-8 md:grid-cols-3">
-          {/* Card 1 */}
           <div className="cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 hover:shadow-lg transition-shadow duration-300">
             <div className="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
               <img
@@ -37,7 +36,6 @@ const Card = () => {
             </div>
           </div>
 
-          {/* Card 2 */}
           <div className="cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 hover:shadow-lg transition-shadow duration-300">
             <div className="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
               <img
@@ -67,7 +65,6 @@ const Card = () => {
             </div>
           </div>
 
-          {/* Card 3 */}
           <div className="cursor-pointer group relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96 hover:shadow-lg transition-shadow duration-300">
             <div className="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
               <img
@@ -83,8 +80,8 @@ const Card = () => {
               </h6>
               <p className="text-slate-600 leading-normal font-light">
                 The Traffic Alerts feature on fine.lk offers real-time updates
-                  on road conditions, safety, and critical alerts, enhancing
-                  travel efficiency and safety.
+                on road conditions, safety, and critical alerts, enhancing
+                travel efficiency and safety.
               </p>
             </div>
             <div className="px-4 pb-4 pt-0 mt-2">

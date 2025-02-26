@@ -1,18 +1,31 @@
 import { useEffect, useState } from "react";
-import BASE_URL from '../config';
+import BASE_URL from "../config";
 
 const PostOffice = () => {
-
   const [postOffices, setPostOffices] = useState([]);
-  const [form, setForm] = useState({ postal_code: "", post_office_name: "", email: "", password: "", district: "" });
+  const [filteredPostOffices, setFilteredPostOffices] = useState([]);
+  const [form, setForm] = useState({
+    postal_code: "",
+    post_office_name: "",
+    email: "",
+    password: "",
+    district: "",
+  });
   const [editId, setEditId] = useState(null);
 
-  // Fetch post offices
+  const [filter, setFilter] = useState({
+    postal_code: "",
+    post_office_name: "",
+    email: "",
+    district: "",
+  });
+
   const fetchPostOffices = async () => {
     try {
       const response = await fetch(`${BASE_URL}/api/postoffices`);
       const data = await response.json();
       setPostOffices(data);
+      setFilteredPostOffices(data);
     } catch (error) {
       console.error("Error fetching post offices:", error);
     }
@@ -22,10 +35,11 @@ const PostOffice = () => {
     fetchPostOffices();
   }, []);
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = editId ? `${BASE_URL}/api/postoffices/${editId}` : `${BASE_URL}/api/postoffices`;
+    const url = editId
+      ? `${BASE_URL}/api/postoffices/${editId}`
+      : `${BASE_URL}/api/postoffices`;
     const method = editId ? "PUT" : "POST";
     try {
       const response = await fetch(url, {
@@ -35,7 +49,13 @@ const PostOffice = () => {
       });
       const data = await response.json();
       fetchPostOffices();
-      setForm({ postal_code: "", post_office_name: "", email: "", password: "", district: "" });
+      setForm({
+        postal_code: "",
+        post_office_name: "",
+        email: "",
+        password: "",
+        district: "",
+      });
       setEditId(null);
     } catch (error) {
       console.error("Error saving post office:", error);
@@ -47,7 +67,7 @@ const PostOffice = () => {
       const response = await fetch(`${BASE_URL}/postoffices/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedField), 
+        body: JSON.stringify(updatedField),
       });
       if (!response.ok) {
         throw new Error("Failed to update field");
@@ -55,16 +75,16 @@ const PostOffice = () => {
       const updatedPostOffice = await response.json();
       setPostOffices((prev) =>
         prev.map((postOffice) =>
-          postOffice.post_id === id ? { ...postOffice, ...updatedPostOffice } : postOffice
+          postOffice.post_id === id
+            ? { ...postOffice, ...updatedPostOffice }
+            : postOffice
         )
       );
     } catch (error) {
       console.error("Error updating post office:", error);
     }
   };
-  
 
-  // Handle delete
   const handleDelete = async (id) => {
     try {
       await fetch(`${BASE_URL}/api/postoffices/${id}`, { method: "DELETE" });
@@ -74,7 +94,6 @@ const PostOffice = () => {
     }
   };
 
-  // Set form for edit
   const handleEdit = (postOffice) => {
     setForm({
       postal_code: postOffice.postal_code,
@@ -86,11 +105,73 @@ const PostOffice = () => {
     setEditId(postOffice.post_id);
   };
 
-  return (
-  <div>
-    <h3 className="text-2xl font-bold mb-4">Post Office</h3>
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilter((prevFilter) => {
+      const newFilter = { ...prevFilter, [name]: value };
+      filterPostOffices(newFilter);
+      return newFilter;
+    });
+  };
 
-    <form onSubmit={handleSubmit} className="mb-4">
+  const filterPostOffices = (filterCriteria) => {
+    const filtered = postOffices.filter((postOffice) => {
+      return (
+        (filterCriteria.postal_code
+          ? postOffice.postal_code.includes(filterCriteria.postal_code)
+          : true) &&
+        (filterCriteria.post_office_name
+          ? postOffice.post_office_name
+              .toLowerCase()
+              .includes(filterCriteria.post_office_name.toLowerCase())
+          : true) &&
+        (filterCriteria.email
+          ? postOffice.email
+              .toLowerCase()
+              .includes(filterCriteria.email.toLowerCase())
+          : true) &&
+        (filterCriteria.district
+          ? postOffice.district
+              .toLowerCase()
+              .includes(filterCriteria.district.toLowerCase())
+          : true)
+      );
+    });
+    setFilteredPostOffices(filtered);
+  };
+
+  return (
+    <div>
+      <h3 className="text-2xl font-bold mb-4">Post Office</h3>
+
+      <div className="mb-4">
+        <input
+          type="text"
+          name="postal_code"
+          placeholder="Filter by Postal Code"
+          value={filter.postal_code}
+          onChange={handleFilterChange}
+          className="border px-2 py-1 mr-2"
+        />
+        <input
+          type="text"
+          name="post_office_name"
+          placeholder="Filter by Post Office Name"
+          value={filter.post_office_name}
+          onChange={handleFilterChange}
+          className="border px-2 py-1 mr-2"
+        />
+        <input
+          type="text"
+          name="district"
+          placeholder="Filter by District"
+          value={filter.district}
+          onChange={handleFilterChange}
+          className="border px-2 py-1 mr-2"
+        />
+      </div>
+
+      <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="text"
           placeholder="Postal Code"
@@ -103,7 +184,9 @@ const PostOffice = () => {
           type="text"
           placeholder="Post Office Name"
           value={form.post_office_name}
-          onChange={(e) => setForm({ ...form, post_office_name: e.target.value })}
+          onChange={(e) =>
+            setForm({ ...form, post_office_name: e.target.value })
+          }
           required
           className="border px-2 py-1 mr-2"
         />
@@ -136,7 +219,7 @@ const PostOffice = () => {
         </button>
       </form>
 
-    <div className="overflow-x-auto">
+      <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
@@ -144,16 +227,16 @@ const PostOffice = () => {
                 Post_ID
               </th>
               <th className="px-5 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                postal code
+                Postal Code
               </th>
               <th className="px-10 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                post office name
+                Post Office Name
               </th>
               <th className="px-10 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                email
+                Email
               </th>
               <th className="px-4 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                district
+                District
               </th>
               <th className="px-4 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
                 Edit
@@ -161,18 +244,26 @@ const PostOffice = () => {
             </tr>
           </thead>
           <tbody>
-            {postOffices.map((postOffice) => (
+            {filteredPostOffices.map((postOffice) => (
               <tr key={postOffice.post_id}>
                 <td className="px-6 py-3 border-b">{postOffice.post_id}</td>
                 <td className="px-6 py-3 border-b">{postOffice.postal_code}</td>
-                <td className="px-6 py-3 border-b">{postOffice.post_office_name}</td>
+                <td className="px-6 py-3 border-b">
+                  {postOffice.post_office_name}
+                </td>
                 <td className="px-6 py-3 border-b">{postOffice.email}</td>
                 <td className="px-6 py-3 border-b">{postOffice.district}</td>
                 <td className="px-6 py-3 border-b">
-                  <button onClick={() => handleEdit(postOffice)} className="px-2 py-1 text-white bg-yellow-500 mr-2">
+                  <button
+                    onClick={() => handleEdit(postOffice)}
+                    className="px-2 py-1 text-white bg-yellow-500 mr-2"
+                  >
                     Edit
                   </button>
-                  <button onClick={() => handleDelete(postOffice.post_id)} className="px-2 py-1 text-white bg-red-500">
+                  <button
+                    onClick={() => handleDelete(postOffice.post_id)}
+                    className="px-2 py-1 text-white bg-red-500"
+                  >
                     Delete
                   </button>
                 </td>
@@ -181,7 +272,7 @@ const PostOffice = () => {
           </tbody>
         </table>
       </div>
-  </div>
+    </div>
   );
 };
 

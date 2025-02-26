@@ -1,6 +1,14 @@
 import { Link, Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaHome, FaClipboardList, FaHandHoldingUsd, FaExclamationCircle, FaCog, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaHome,
+  FaClipboardList,
+  FaHandHoldingUsd,
+  FaExclamationCircle,
+  FaCog,
+  FaUserCircle,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
 const PostOfficeDashboard = () => {
   const menuItems = [
@@ -13,7 +21,7 @@ const PostOfficeDashboard = () => {
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-gray-50 to-emerald-50">
       {/* Sidebar */}
-      <motion.div 
+      <motion.div
         initial={{ x: -250 }}
         animate={{ x: 0 }}
         className="w-64 bg-white/80 backdrop-blur-md shadow-xl rounded-r-2xl flex flex-col justify-between"
@@ -60,10 +68,8 @@ const PostOfficeDashboard = () => {
         </div>
       </motion.div>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        {/* Navbar */}
-        <motion.nav 
+        <motion.nav
           initial={{ y: -50 }}
           animate={{ y: 0 }}
           className="bg-white/80 backdrop-blur-md shadow-md rounded-b-2xl mb-4"
@@ -77,13 +83,19 @@ const PostOfficeDashboard = () => {
             </Link>
             <div className="space-x-6 flex items-center">
               <motion.div whileHover={{ scale: 1.05 }}>
-                <Link to="#" className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
+                <Link
+                  to="#"
+                  className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors"
+                >
                   <FaCog className="mr-2" />
                   Settings
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }}>
-                <Link to="#" className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors">
+                <Link
+                  to="#"
+                  className="flex items-center text-gray-600 hover:text-emerald-600 transition-colors"
+                >
                   <FaUserCircle className="mr-2" />
                   Profile
                 </Link>
@@ -92,7 +104,6 @@ const PostOfficeDashboard = () => {
           </div>
         </motion.nav>
 
-        {/* Content Area */}
         <main className="flex-1 p-6">
           <motion.div
             initial={{ opacity: 0 }}

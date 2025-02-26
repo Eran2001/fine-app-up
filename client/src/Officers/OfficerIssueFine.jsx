@@ -21,7 +21,6 @@ const OfficerIssueFine = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate all fields
     const emptyFields = Object.entries(fine).filter(
       ([_, value]) => !value.trim()
     );
@@ -30,7 +29,6 @@ const OfficerIssueFine = () => {
       return;
     }
 
-    // Regex patterns for validation
     const licenseIdPattern = /^(?:[A-Z]\d{7}|\d{12})$/;
     const phonePattern = /^0\d{9}$/;
 

@@ -2,22 +2,21 @@ import React, { useEffect } from "react";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import AOS from "aos";
-import "aos/dist/aos.css"; // Import AOS styles
+import "aos/dist/aos.css";
 
 const Fine = () => {
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Initialize AOS with a 1-second duration for animation
+    AOS.init({ duration: 1000 });
   }, []);
 
   return (
     <div className="font-sans relative z-10 bg-[#fff]">
       <Navbar />
-      {/* Header Section */}
       <div
         className="relative bg-cover bg-center bg-fixed"
         style={{
           backgroundImage: "url('fine.jpg')",
-          height: "600px", // Adjusting the height as per your original image
+          height: "600px",
         }}
       >
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center bg-black bg-opacity-50">
@@ -30,7 +29,6 @@ const Fine = () => {
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="max-w-4xl mx-auto py-12 px-6 sm:px-8 lg:px-10">
         <h3
           className="text-2xl md:text-3xl font-bold text-center mb-6"

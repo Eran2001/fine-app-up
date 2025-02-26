@@ -2,7 +2,14 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaRegBuilding, FaUserLock, FaClipboardList, FaChartLine, FaUsers, FaGlobe } from "react-icons/fa";
+import {
+  FaRegBuilding,
+  FaUserLock,
+  FaClipboardList,
+  FaChartLine,
+  FaUsers,
+  FaGlobe,
+} from "react-icons/fa";
 
 const FeatureCard = ({ icon, title, description }) => (
   <motion.div
@@ -20,10 +27,7 @@ const FeatureCard = ({ icon, title, description }) => (
 );
 
 const StatCard = ({ number, label }) => (
-  <motion.div
-    whileHover={{ scale: 1.05 }}
-    className="text-center p-6"
-  >
+  <motion.div whileHover={{ scale: 1.05 }} className="text-center p-6">
     <h4 className="text-4xl font-bold text-blue-600 mb-2">{number}+</h4>
     <p className="text-gray-600">{label}</p>
   </motion.div>
@@ -41,7 +45,8 @@ const PostOffices = () => {
         transition={{ duration: 1 }}
         className="relative bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('pp.png')",
+          backgroundImage:
+            "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('pp.png')",
           height: "85vh",
         }}
       >
@@ -54,7 +59,8 @@ const PostOffices = () => {
             className="text-center px-4"
           >
             <h1 className="text-7xl font-bold mb-6 tracking-tight leading-tight">
-              Welcome to<br/>
+              Welcome to
+              <br />
               <span className="bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text text-transparent">
                 Post Office Portal
               </span>
@@ -74,7 +80,6 @@ const PostOffices = () => {
         </div>
       </motion.div>
 
-      {/* Stats Section */}
       <div className="container mx-auto px-4 py-12 -mt-20 relative z-10">
         <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl p-8 max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -85,7 +90,6 @@ const PostOffices = () => {
         </div>
       </div>
 
-      {/* Feature Cards */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <FeatureCard
@@ -106,7 +110,6 @@ const PostOffices = () => {
         </div>
       </div>
 
-      {/* Final CTA Section */}
       <div className="container mx-auto px-4 py-16 mb-12">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -118,7 +121,8 @@ const PostOffices = () => {
             Ready to Transform Your Operations?
           </h2>
           <p className="text-blue-100 mb-8 text-lg">
-            Join thousands of post offices already benefiting from our digital platform
+            Join thousands of post offices already benefiting from our digital
+            platform
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}

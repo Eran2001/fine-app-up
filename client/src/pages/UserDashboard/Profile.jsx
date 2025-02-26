@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const Profile = ({ avatar, setAvatar }) => {
   const [newAvatar, setNewAvatar] = useState(null);
 
-  // Handle file upload
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -15,10 +14,9 @@ const Profile = ({ avatar, setAvatar }) => {
     }
   };
 
-  // Update avatar when the user selects a new file
   const handleAvatarUpdate = () => {
     if (newAvatar) {
-      setAvatar(newAvatar); // Update the avatar in the parent state
+      setAvatar(newAvatar);
     }
   };
 
@@ -31,11 +29,7 @@ const Profile = ({ avatar, setAvatar }) => {
         ) : (
           <p>No avatar selected</p>
         )}
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-        />
+        <input type="file" accept="image/*" onChange={handleFileChange} />
         <button onClick={handleAvatarUpdate}>Update Avatar</button>
       </div>
     </div>
