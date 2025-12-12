@@ -42,7 +42,6 @@ import NoMatch from "./components/NoMatch/NoMatch";
 const App = () => {
   return (
     <div>
-      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NoMatch />} />
@@ -65,8 +64,6 @@ const App = () => {
           <Route path="pay-fine" element={<PostPayFine />} />
           <Route path="issues" element={<PostReportIssue />} />
         </Route>
-        {/* <Route path="/admin-dashboard" element={<AdminProtectedRoute element={<AdminDashboard />} />} /> */}
-        {/* <Route path="/user-dashboard" component={UserDashboard} /> */}
         <Route
           path="/admin-dashboard"
           element={<AdminProtectedRoute element={<AdminDashboard />} />}
